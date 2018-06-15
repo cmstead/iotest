@@ -1,7 +1,7 @@
 IoTest
 ======
 
-IoTest is a unit testing framework for the Io language. It is currently under development and is not ready for use.
+IoTest is a testing framework for the Io language. It is currently under development and is not ready for use.
 
 The feature set is/will be as follows:
 
