@@ -1,9 +1,15 @@
-testRunner := IoTestRunner clone
+launchPath := System launchPath
+
+Importer addSearchPath("#{launchPath}/importerConfig" interpolate)
+
+(AppImport clone) configure()
+(TestImport clone) configure()
 
 cwd := Directory currentWorkingDirectory
 
-testRunner \
-    setCwd(cwd) \
-    setTestExtension(".test") \
-    addTestPath("tests") \
-    run()
+IoTestRunnerFactory \
+    buildRunner() \
+        setCwd(cwd) \
+        setTestExtension(".test") \
+        addTestPath("tests") \
+        run()

@@ -1,5 +1,5 @@
-Temp := Object clone
+Temp := IoTest clone
 
-Temp init := method(
-    "hi!" println
+Temp testRunninATest := method(
+    "Running a test!" println
 )
