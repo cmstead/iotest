@@ -1,5 +1,3 @@
-Importer addSearchPath("libs/ImportConfigure")
-
 AppImport := ImportConfigure clone
 
 AppImport init := method(

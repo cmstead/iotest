@@ -1,9 +1,9 @@
-launchPath := System launchPath
+ModuleLoader clone \
+    addSearchPath("importConfig") \
+    configure()
 
-Importer addSearchPath("#{launchPath}/importerConfig" interpolate)
-
-(AppImport clone) configure()
-(TestImport clone) configure()
+AppImport clone configure()
+TestImport clone configure()
 
 cwd := Directory currentWorkingDirectory
 
