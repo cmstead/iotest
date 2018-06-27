@@ -10,11 +10,11 @@ The feature set is/will be as follows:
     - [x] Test file locations
     - [x] Test file extension
     - [ ] Reporting level
-- [ ] Run all tests via a configured test runner
-- [ ] Create test suites
-- [ ] Create test cases
+- [x] Run all tests via a configured test runner
+- [x] Create test suites
+- [x] Create test cases
 - [ ] Assertions (Each with an optional failure message)
-    - [ ] Bare assertion
+    - [x] Bare assertion
     - [ ] Equality
     - [ ] Inequality
     - [ ] True
@@ -24,6 +24,6 @@ The feature set is/will be as follows:
     - [ ] Does not throw
 - [ ] Reporting
     - [ ] JSON output
-    - [ ] Detail
+    - [x] Detail
     - [ ] Summary
     - [ ] Failure only
