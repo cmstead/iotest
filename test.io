@@ -1,11 +1,7 @@
-ModuleLoader clone \
-    addSearchPath("importConfig") \
-    configure()
+packageConfig := PackageConfig clone
+packageConfig development call()
 
-AppImport clone configure()
-TestImport clone configure()
-
-cwd := Directory currentWorkingDirectory
+cwd := LibPath getSearchPathByDirName(packageConfig name)
 
 IoTestRunnerFactory \
     buildRunner() \

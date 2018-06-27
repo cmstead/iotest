@@ -1,4 +1,4 @@
-(AppImport clone) configure()
+(PackageConfig clone) production call()
 
 IoTestRunnerFactory := Object clone
 

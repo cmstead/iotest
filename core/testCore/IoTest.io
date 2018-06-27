@@ -1,7 +1,27 @@
 IoTest := Object clone
 
-IoTest init := method(
-    (AppImport clone) configure()
+IoTest testSuites := nil
+
+IoTest initialize := method(
+    testSuites = list()
+    return self
 )
 
-IoTest testSuite := method()
+IoTest testSuite := method(
+    description,
+
+    newTestSuite := IoTestSuite clone
+    newTestSuite setDescription(description)
+
+    testSuites append(newTestSuite)
+
+    return newTestSuite
+)
+
+IoTest runTests := method(
+    testSuites \
+        foreach(
+            testSuite,
+            testSuite run()
+        )
+)

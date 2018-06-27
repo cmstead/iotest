@@ -20,18 +20,5 @@ RunnerUtils getFileNames := method(
             getFilePaths(fullPath)
         )) \
         flatten \
-        select(fileName, isTestFile(fileName)) 
-)
-
-RunnerUtils runTestMethods := method(
-    proto,
-
-    proto \
-        slotNames \
-        select(slotName, (
-            slotName exSlice(0, 4) == "test"
-        )) \
-        foreach(i, testSlot, (
-            proto getSlot(testSlot)()
-        ))
+        select(fileName, isTestFile(fileName))
 )

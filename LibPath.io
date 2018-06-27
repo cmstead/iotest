@@ -1,39 +1,3 @@
-ModuleLoader := Object clone
-
-ModuleLoader libPathInstance := nil
-ModuleLoader searchPaths := nil
-ModuleLoader libPathName ::= nil
-
-ModuleLoader init := method(
-    libPathInstance = LibPath clone
-    searchPaths = list()
-)
-
-ModuleLoader addSearchPath := method(
-    searchPath,
-
-    searchPaths append(searchPath)
-
-    return self
-)
-
-ModuleLoader configure := method(
-    basePath,
-
-    if(basePath != nil) \
-        then(libPathInstance setLaunchPath(basePath))
-
-    if(libPathName != nil) \
-        then(libPathInstance setLibPathName(libPathName))
-
-    libPathInstance addLibPaths()
-
-    searchPaths foreach(
-        searchPath,
-        libPathInstance addPath(searchPath)
-    )
-)
-
 LibPath := Object clone
 
 LibPath launchPath ::= nil
@@ -49,6 +13,26 @@ LibPath init := method(
 
 LibPath setBasePath := method(
     basePath = "#{launchPath}/#{libPathName}" interpolate
+    return self
+)
+
+LibPath setLaunchPath := method(
+    newLaunchPath,
+
+    launchPath = newLaunchPath
+    setBasePath()
+
+    return self
+)
+
+LibPath getSearchPathByDirName := method(
+    dirName,
+
+    searchPaths := Importer paths
+
+    return Importer paths \
+        select(path, path findSeq(dirName) != nil) \
+        at(0)
 )
 
 LibPath setLibPathName := method(
@@ -82,6 +66,12 @@ LibPath addLibPaths := method(
         ))
     
     return self
+)
+
+LibPath addPathWithBase := method(
+    basePath, pathName,
+
+    LibPath addPath("#{basePath}/#{pathName}" interpolate)
 )
 
 LibPath addPath := method(
