@@ -15,10 +15,10 @@ The feature set is/will be as follows:
 - [x] Create test cases
 - [ ] Assertions (Each with an optional failure message)
     - [x] Bare assertion
-    - [ ] Equality
-    - [ ] Inequality
-    - [ ] True
-    - [ ] False
+    - [x] Equality
+    - [x] Inequality
+    - [x] True
+    - [x] False
     - [ ] Nil
     - [ ] Throws (with optional message string)
     - [ ] Does not throw
@@ -27,3 +27,4 @@ The feature set is/will be as follows:
     - [x] Detail
     - [ ] Summary
     - [ ] Failure only
+- [ ] Documentation
