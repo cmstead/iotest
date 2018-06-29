@@ -16,6 +16,7 @@ PackageConfig init := method(
         moduleLoader \
             addSearchPath("core") \
             addSearchPath("core/runnerCore") \
+            addSearchPath("core/assertionCore") \
             addSearchPath("core/testCore") \
             configure()
     ))

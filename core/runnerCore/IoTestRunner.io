@@ -53,7 +53,7 @@ IoTestRunner loadTests := method(
 IoTestRunner report := method(
     testSuiteResults,
 
-    IoTestReporter writeBannerAndReport(testSuiteResults)
+    IoTestReporter clone writeBannerAndReport(testSuiteResults)
 )
 
 IoTestRunner run := method(

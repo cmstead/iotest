@@ -1,5 +1,17 @@
 IoTestReporter := Object clone
 
+IoTestReporter testCount := nil
+IoTestReporter testStats := nil
+
+IoTestReporter init := method(
+    testCount = 0
+    testStats = Map clone
+
+    testStats atPut("pass", 0)
+    testStats atPut("fail", 0)
+    testStats atPut("skipped", 0)
+)
+
 IoTestReporter banner := \
 """
     ==============
@@ -8,16 +20,20 @@ IoTestReporter banner := \
 
 """
 
-IoTestReporter footer := \
-"""
+IoTestReporter updateTestStats := method(
+    status,
 
-    ==============
-    
-    ==============
-"""
+    testCount = testCount + 1
+    statCount := testStats at(status) + 1
+
+    testStats atPut(status, statCount)
+)
+
 
 IoTestReporter reportTestResult := method(
     testResult,
+
+    updateTestStats(testResult status)
 
     writeln("        #{testResult status} -- #{testResult description}" interpolate)
 
@@ -30,7 +46,7 @@ IoTestReporter reportTestResult := method(
 IoTestReporter reportSuiteResults := method(
     testSuiteResult,
 
-    writeln("    #{testSuiteResult description}" interpolate)
+    writeln("\n    #{testSuiteResult description}\n" interpolate)
 
     testSuiteResult testResults \
         foreach(
@@ -38,6 +54,24 @@ IoTestReporter reportSuiteResults := method(
 
             reportTestResult(testResult)
         )
+)
+
+IoTestReporter reportStats := method(
+    passed := testStats at("pass")
+    failed := testStats at("fail")
+    skipped := testStats at("skipped")
+
+    """
+
+    --------------
+
+    Test results:
+
+        Passed: #{passed}
+        Failed: #{failed}
+        Skipped: #{skipped}
+    
+    --------------""" interpolate println
 )
 
 IoTestReporter report := method(
@@ -58,5 +92,5 @@ IoTestReporter writeBannerAndReport := method(
 
     report(testSuiteResults)
 
-    writeln(footer)
+    reportStats()
 )
