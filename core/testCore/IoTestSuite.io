@@ -33,10 +33,16 @@ IoTestSuite skip := method(
 )
 
 IoTestSuite run := method(
-    "    #{description}" interpolate println
+    testSuiteResult := IoTestSuiteResult clone
+    testSuiteResult setDescription(description)
 
     tests foreach(
         test,
-        test run()
+        (
+            testResult := test run()
+            testSuiteResult addTestResult(testResult)
+        )
     )
+
+    return testSuiteResult
 )

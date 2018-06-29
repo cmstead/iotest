@@ -2,9 +2,8 @@ IoTest := Object clone
 
 IoTest testSuites := nil
 
-IoTest initialize := method(
-    testSuites = list()
-    return self
+IoTest init := method(
+    testSuites = list()    
 )
 
 IoTest testSuite := method(
@@ -19,9 +18,15 @@ IoTest testSuite := method(
 )
 
 IoTest runTests := method(
+    testSuiteResults := list()
+
     testSuites \
         foreach(
             testSuite,
-            testSuite run()
+            testSuiteResult := testSuite run()
+
+            testSuiteResults append(testSuiteResult)
         )
+    
+    return testSuiteResults
 )

@@ -32,11 +32,30 @@ ioTest testSuite("IoAssertion assertEqual") \
 
         block(
             exception := try(
-                IoAssertion assertEqual(false, true, "Expected exception")
+                expected := false
+                actual := true
+
+                IoAssertion assertEqual(expected, actual, "Expected exception")
             )
 
             exception catch()
 
             IoAssertion assert(exception != nil, "An exception was not raised")
+        )
+    ) \
+    test(
+        "does not raise an exception when values are equal",
+
+        block(
+            exception := try(
+                expected := true
+                actual := true
+
+                IoAssertion assertEqual(expected, actual, "No exception expected")
+            )
+
+            exception catch()
+
+            IoAssertion assert(exception == nil, "An exception was raised")
         )
     )

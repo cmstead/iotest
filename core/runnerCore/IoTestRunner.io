@@ -6,6 +6,7 @@ IoTestRunner testExtension := nil
 IoTestRunner testPaths ::= nil
 
 IoTestRunner init := method(
+    ioTest = IoTest clone
     testExtension = ".io"
 
     setCwd(Directory currentWorkingDirectory)
@@ -37,26 +38,8 @@ IoTestRunner buildFileCheck := method(
     )
 )
 
-IoTestRunner writeBanner := method(
-    """
-    ==============
-    *** IoTest ***
-    ==============
-
-    """ println
-)
-
-IoTestRunner writeFooter := method(
-    """
-
-    ==============
-    ==============
-    """ println
-)
-
-IoTestRunner run := method(
+IoTestRunner loadTests := method(
     isTestFile := buildFileCheck()
-    ioTest = (IoTest clone) initialize()
 
     RunnerUtils getFileNames(testPaths, isTestFile) \
         foreach(i, fileName, (
@@ -64,9 +47,19 @@ IoTestRunner run := method(
         )
     )
 
-    writeBanner()
+    return ioTest
+)
 
-    ioTest runTests()
+IoTestRunner report := method(
+    testSuiteResults,
 
-    writeFooter()
+    IoTestReporter writeBannerAndReport(testSuiteResults)
+)
+
+IoTestRunner run := method(
+    testSuiteResults := \
+        loadTests() \
+        runTests()
+    
+    report(testSuiteResults)
 )

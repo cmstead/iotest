@@ -19,13 +19,11 @@ IoTestCase runTestCase := method(
 
 )
 
-IoTestCase report := method(
-    writeln("        #{status} -- #{description}" interpolate)
-
-    if(
-        testError != nil,
-        writeln("        Error: #{testError}\n" interpolate)
-    )
+IoTestCase buildTestResult := method(
+    IoTestCaseResult clone \
+        setStatus(status) \
+        setDescription(description) \
+        setError(testError)
 )
 
 IoTestCase run := method(
@@ -34,5 +32,5 @@ IoTestCase run := method(
         runTestCase()
     )
 
-    report()
+    buildTestResult()
 )
