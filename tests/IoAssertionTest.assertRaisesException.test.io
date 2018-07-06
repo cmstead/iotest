@@ -1,5 +1,5 @@
 ioTest testSuite("IoAssertion assertRaisesException") \
-    skip(
+    test(
         "raises an exception when provided block does not raise an exception",
 
         block(
@@ -15,19 +15,66 @@ ioTest testSuite("IoAssertion assertRaisesException") \
 
             exception catch()
 
+            exception error println
+
             IoAssertion assertEqual(exception error, expectedException, "The correct exception was not raised")
         )
-    ) //\
-    // test(
-    //     "does not raise an exception on true",
+    ) \
+    test(
+        "raises an exception when provided block raises exception with wrong message",
 
-    //     block(
-    //         exception := try(
-    //             IoAssertion assertTrue(true, "Expecting no exception")
-    //         )
+        block(
+            expectedException := "Expected exception"
 
-    //         exception catch()
+            exception := try(
+                IoAssertion assertRaisesException(
+                    block(Exception raise("Oh noes!!")),
+                    "Does not match!!",
+                    expectedException
+                )
+            )
 
-    //         IoAssertion assert(exception == nil, "An exception was raised")
-    //     )
-    // )
+            exception catch()
+
+            exception error println
+
+            IoAssertion assertEqual(exception error, expectedException, "The correct exception was not raised")
+        )
+    ) \
+    test(
+        "succeeds when test block raises exception",
+
+        block(
+            expectedException := "Expected exception"
+
+            exception := try(
+                IoAssertion assertRaisesException(
+                    block(Exception raise("Exception was raised")),
+                    nil,
+                    expectedException
+                )
+            )
+
+            exception catch()
+
+            IoAssertion assert(exception == nil, "An exception was raised: #{exception}" interpolate)
+        )
+    ) \
+    test(
+        "succeeds when test block raises exception and exception message matches",
+
+        block(
+            expectedException := "Expected exception"
+
+            exception := try(
+                IoAssertion assertRaisesException(
+                    block(Exception raise(expectedException)),
+                    expectedException
+                )
+            )
+
+            exception catch()
+
+            IoAssertion assert(exception == nil, "An exception was raised: #{exception}" interpolate)
+        )
+    )

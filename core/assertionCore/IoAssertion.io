@@ -36,11 +36,27 @@ IoAssertion assertNotEqual := method(
     verifyAndRaise(notEqual call(expected, actual), buildMessageOnNil)
 )
 
-// IoAssertion assertRaisesException := method(
-//     testBlock, expectedMessage, failureMessage,
+IoAssertion assertRaisesException := method(
+    testBlock, expectedMessage, failureMessage,
 
-    
-// )
+    exception := try(testBlock call())
+    exception catch()
+
+    errorMessageMatches := block(
+        (expectedMessage == nil) or \
+        (exception error == expectedMessage)
+    )
+
+    expectation := block(
+        (exception != nil) and errorMessageMatches call()
+    )
+
+    verifyAndRaise(
+        expectation,
+        block(failureMessage)
+    )
+
+)
 
 IoAssertion assertTrue := method(
     actual, failureMessage,
