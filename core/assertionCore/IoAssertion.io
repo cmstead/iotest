@@ -16,6 +16,30 @@ do(
             Exception raise(messageBuilder call())
         )
     )
+
+    inverse := method(
+        predicate,
+
+        return block(
+            not(predicate())
+        )
+    )
+
+    exceptionCheckFactory := method(
+        testBlock, expectedMessage,
+
+        return block(
+            exception := try(testBlock call())
+            exception catch()
+
+            errorMessageMatches := block(
+                (expectedMessage == nil) or \
+                (exception error == expectedMessage)
+            )
+
+            return (exception != nil) and (errorMessageMatches call())
+        )
+    )
 )
 
 IoAssertion assertEqual := method(
@@ -39,23 +63,9 @@ IoAssertion assertNotEqual := method(
 IoAssertion assertRaisesException := method(
     testBlock, expectedMessage, failureMessage,
 
-    exception := try(testBlock call())
-    exception catch()
+    isExceptionRaised := exceptionCheckFactory(testBlock, expectedMessage)
 
-    errorMessageMatches := block(
-        (expectedMessage == nil) or \
-        (exception error == expectedMessage)
-    )
-
-    expectation := block(
-        (exception != nil) and errorMessageMatches call()
-    )
-
-    verifyAndRaise(
-        expectation,
-        block(failureMessage)
-    )
-
+    verifyAndRaise(isExceptionRaised, block(failureMessage))
 )
 
 IoAssertion assertTrue := method(
