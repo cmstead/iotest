@@ -13,15 +13,14 @@ The feature set is/will be as follows:
 - [x] Run all tests via a configured test runner
 - [x] Create test suites
 - [x] Create test cases
-- [ ] Assertions (Each with an optional failure message)
+- [x] Assertions (Each with an optional failure message)
     - [x] Bare assertion
     - [x] Equality
     - [x] Inequality
     - [x] True
     - [x] False
-    - [ ] Nil
-    - [ ] Throws (with optional message string)
-    - [ ] Does not throw
+    - [x] Raises Exception (with optional message string)
+    - [x] Does not raise exception
 - [ ] Reporting
     - [ ] JSON output
     - [x] Detail

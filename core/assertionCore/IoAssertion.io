@@ -21,7 +21,8 @@ do(
         predicate,
 
         return block(
-            not(predicate())
+            result := predicate call()
+            return result != true
         )
     )
 
@@ -66,6 +67,14 @@ IoAssertion assertRaisesException := method(
     isExceptionRaised := exceptionCheckFactory(testBlock, expectedMessage)
 
     verifyAndRaise(isExceptionRaised, block(failureMessage))
+)
+
+IoAssertion assertDoesNotRaiseException := method(
+    testBlock, failureMessage,
+
+    noExceptionIsRaised := inverse(exceptionCheckFactory(testBlock, nil))
+
+    verifyAndRaise(noExceptionIsRaised, block(failureMessage))
 )
 
 IoAssertion assertTrue := method(

@@ -15,8 +15,6 @@ ioTest testSuite("IoAssertion assertRaisesException") \
 
             exception catch()
 
-            exception error println
-
             IoAssertion assertEqual(exception error, expectedException, "The correct exception was not raised")
         )
     ) \
@@ -35,8 +33,6 @@ ioTest testSuite("IoAssertion assertRaisesException") \
             )
 
             exception catch()
-
-            exception error println
 
             IoAssertion assertEqual(exception error, expectedException, "The correct exception was not raised")
         )
