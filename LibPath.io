@@ -25,16 +25,6 @@ LibPath setLaunchPath := method(
     return self
 )
 
-LibPath getSearchPathByDirName := method(
-    dirName,
-
-    searchPaths := Importer paths
-
-    return Importer paths \
-        select(path, path findSeq(dirName) != nil) \
-        at(0)
-)
-
 LibPath setLibPathName := method(
     pathName,
 
@@ -45,21 +35,8 @@ LibPath setLibPathName := method(
     return self
 )
 
-LibPath getDirectoryPaths := method(
-    libsPath,
-
-    baseDirectory := Directory with(libsPath)
-
-    return \
-        Directory \
-            with(libsPath) \
-            items \
-            select(item, (item name != ".") and (item name != "..")) \
-            map(item, item name)
-)
-
 LibPath addLibPaths := method(
-    getDirectoryPaths(basePath) \
+    PathUtil getDirectoryPaths(basePath) \
         foreach(pathName, (
             libPath := "#{basePath}/#{pathName}" interpolate
             addPath(libPath)
@@ -80,4 +57,11 @@ LibPath addPath := method(
     Importer addSearchPath(pathName)
 
     return self
+)
+
+LibPath addPathWithBaseByDirName := method(
+    dirName, searchPath,
+
+    basePath := PathUtil getSearchPathByDirName(dirName)
+    addPathWithBase(basePath, "libs/ModuleConfig")
 )

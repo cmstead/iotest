@@ -22,7 +22,7 @@ ModuleLoader addSearchPath := method(
 ModuleLoader setBasePathByName := method(
     dirName,
 
-    basePath = libPathInstance getSearchPathByDirName(dirName)
+    basePath = PathUtil getSearchPathByDirName(dirName)
 )
 
 ModuleLoader configure := method(

@@ -1,7 +1,7 @@
 packageConfig := PackageConfig clone
 packageConfig development call()
 
-cwd := LibPath getSearchPathByDirName(packageConfig name)
+cwd := PathUtil getSearchPathByDirName(packageConfig name)
 
 IoTestRunnerFactory \
     buildRunner() \
