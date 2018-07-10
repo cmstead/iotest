@@ -1,7 +1,7 @@
 IoTest
 ======
 
-IoTest is a testing framework for the Io language. It is currently under development and is not ready for use.
+IoTest is a testing framework for the Io language. The current state of development allows for basic testing functionality. Though not all roadmap features are complete, the current next step is to produce documentation.  In the meanwhile, the test files in the tests directory provide a basic example of how to write tests using IoTest.
 
 The feature set is/will be as follows:
 
