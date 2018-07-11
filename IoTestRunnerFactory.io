@@ -1,4 +1,4 @@
-(PackageConfig clone) production call()
+IoTestPackage clone production call
 
 IoTestRunnerFactory := Object clone
 

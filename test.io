@@ -1,7 +1,7 @@
-packageConfig := PackageConfig clone
-packageConfig development call()
-
+packageConfig := IoTestPackage clone
 cwd := PathUtil getSearchPathByDirName(packageConfig name)
+
+packageConfig development call
 
 IoTestRunnerFactory \
     buildRunner() \

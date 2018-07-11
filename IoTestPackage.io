@@ -1,6 +1,6 @@
 LibPath addPathWithBaseByDirName("iotest", "libs/ModuleConfig")
 
-PackageConfig := ModuleConfig clone \
+IoTestPackage := ModuleConfig clone \
     do(
         setName("iotest")
         setVersion("1.0.0")
@@ -8,7 +8,7 @@ PackageConfig := ModuleConfig clone \
         initializeModuleLoader()
     )
 
-PackageConfig init := method(
+IoTestPackage init := method(
     prodConfig(block(
         moduleLoader \
             addSearchPath("core") \

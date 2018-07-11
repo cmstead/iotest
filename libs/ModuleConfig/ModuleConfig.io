@@ -12,12 +12,6 @@ ModuleConfig initializeModuleLoader := method(
     moduleLoader setBasePathByName(name)
 )
 
-ModuleConfig configure := method(
-    basePath,
-
-    moduleLoader configure(basePath)
-)
-
 ModuleConfig prodConfig := method(
     prodConfigBlock,
 
